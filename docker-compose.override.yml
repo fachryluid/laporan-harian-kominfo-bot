@@ -1,0 +1,20 @@
+services:
+  bot:
+    image: laporan_bot
+    container_name: laporan_web_dan_bot
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
+            - uploads/
+            - .git/
+            - docker-compose*
+            - Dockerfile
+        - action: rebuild
+          path: package.json
+    command: npm run dev

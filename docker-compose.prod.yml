@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    container_name: laporan_web
+    env_file: .env
+    volumes:
+      - ./uploads:/app/uploads
+    command: node server.js
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  bot:
+    build: .
+    container_name: laporan_bot
+    env_file: .env
+    volumes:
+      - ./uploads:/app/uploads
+    command: node bot.js
+    depends_on:
+      - db

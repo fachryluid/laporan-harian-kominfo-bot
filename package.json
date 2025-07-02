@@ -1,13 +1,15 @@
 {
   "name": "laporan-harian-kominfo-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start:server": "node server.js",
     "start:bot": "node bot.js",
     "dev": "concurrently \"nodemon bot.js\" \"nodemon server.js\"",
-    "sync": "node db/sync.js",
-    "alter": "node db/alter.js"
+    "sync": "node db/sync.js",  
+    "alter": "node db/alter.js",
+    "docker:compose": "docker-compose up --build",
+    "docker:compose:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d"
   },
   "keywords": [],
   "author": "",
