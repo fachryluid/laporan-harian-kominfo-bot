@@ -5,7 +5,7 @@ module.exports = (bot) => {
     const userId = msg.from.id;
     const user = await db.UserProfile.findByPk(userId);
 
-    const fullname = msg.from.username || `${msg.from.first_name} ${msg.from.last_name || ''}`;
+    const fullname = user?.nama || msg.from.username || `${msg.from.first_name} ${msg.from.last_name || ''}`;
     const nip = user?.nip || '_Belum diisi_';
     const jabatan = user?.jabatan || '_Belum diisi_';
     const unitKerja = user?.unit_kerja || '_Belum diisi_';
