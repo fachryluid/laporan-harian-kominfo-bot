@@ -7,7 +7,7 @@ services:
       - ./uploads:/app/uploads
     command: node server.js
     ports:
-      - "80:3000"
+      - "3000:3000"
     depends_on:
       - db
 
