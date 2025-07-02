@@ -8,8 +8,8 @@
     "dev": "concurrently \"nodemon bot.js\" \"nodemon server.js\"",
     "sync": "node db/sync.js",  
     "alter": "node db/alter.js",
-    "docker:compose": "docker-compose up --build",
-    "docker:compose:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d"
+    "docker:compose": "docker compose up --build",
+    "docker:compose:prod": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d"
   },
   "keywords": [],
   "author": "",
