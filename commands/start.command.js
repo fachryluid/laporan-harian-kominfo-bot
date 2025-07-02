@@ -6,7 +6,7 @@ module.exports = (bot) => {
     const userProfile = await db.UserProfile.findByPk(userId);
 
     const chatId = msg.chat.id;
-    const username = userProfile.nama || msg.from.first_name || 'Pengguna';
+    const username = userProfile?.nama || msg.from.first_name || 'Pengguna';
 
     const welcomeMessage = `
 👋 Hai, ${username}!
