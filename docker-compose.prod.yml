@@ -5,12 +5,15 @@ services:
     env_file: .env
     volumes:
       - ./uploads:/app/uploads
+      - /etc/localtime:/etc/localtime:ro
     command: node server.js
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - TZ=Asia/Makassar
 
   bot:
     build: .
@@ -18,7 +21,10 @@ services:
     env_file: .env
     volumes:
       - ./uploads:/app/uploads
+      - /etc/localtime:/etc/localtime:ro
     command: node bot.js
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - TZ=Asia/Makassar
