@@ -17,6 +17,7 @@ services:
     environment:
       MYSQL_DATABASE: laporan_harian_kominfo_bot
       MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Makassar
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
