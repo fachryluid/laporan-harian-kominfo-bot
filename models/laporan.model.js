@@ -12,6 +12,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT,
       allowNull: false,
     },
+    deskripsi_ai: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
     foto: {
       type: Sequelize.STRING,
       allowNull: true,
