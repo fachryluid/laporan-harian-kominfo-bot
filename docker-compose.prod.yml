@@ -9,7 +9,8 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   bot:
     build: .
@@ -19,4 +20,5 @@ services:
       - ./uploads:/app/uploads
     command: node bot.js
     depends_on:
-      - db
+      db:
+        condition: service_healthy
