@@ -6,11 +6,23 @@ const path = require('path');
 
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
+async function waitForDb(maxRetries = 10, delay = 2000) {
+  for (let i = 1; i <= maxRetries; i++) {
+    try {
+      await db.sequelize.authenticate();
+      console.log('✅ Koneksi ke database berhasil.');
+      return;
+    } catch (err) {
+      console.warn(`⏳ DB belum siap (percobaan ${i}/${maxRetries})`);
+      if (i === maxRetries) throw err;
+      await new Promise(res => setTimeout(res, delay));
+    }
+  }
+}
+
 async function startBot() {
   try {
-    await db.sequelize.authenticate();
-    console.log('✅ Koneksi ke database berhasil.');
-
+    await waitForDb();
     await db.sequelize.sync();
 
     // Handle commands
@@ -39,7 +51,6 @@ async function startBot() {
       const text = msg.text;
 
       try {
-        // Jika ada foto
         if (msg.photo) {
           const fileId = msg.photo[msg.photo.length - 1].file_id;
           const file = await bot.getFile(fileId);
@@ -48,26 +59,17 @@ async function startBot() {
           const fileName = `${userId}_${Date.now()}${fileExt}`;
           const destPath = path.join(__dirname, 'uploads', fileName);
 
-          // Download dan simpan file ke uploads/
           const https = require('https');
           const fileStream = fs.createWriteStream(destPath);
           https.get(fileUrl, (res) => {
             res.pipe(fileStream);
             fileStream.on('finish', async () => {
               fileStream.close();
-
               const deskripsi = caption || '(Tidak ada deskripsi)';
-              await db.Laporan.create({
-                user_id: userId,
-                username,
-                deskripsi,
-                foto: `${fileName}` // Simpan relative path ke DB
-              });
-
+              await db.Laporan.create({ user_id: userId, username, deskripsi, foto: fileName });
               bot.sendMessage(chatId, '📸 Laporan dengan foto berhasil disimpan!');
             });
           });
-
         } else if (text && !text.startsWith('/')) {
           await db.Laporan.create({ user_id: userId, username, deskripsi: text });
           bot.sendMessage(chatId, '📝 Laporan berhasil disimpan!');
@@ -78,11 +80,11 @@ async function startBot() {
       }
     });
 
-    // handle others command
+    // Handle unknown command
     bot.onText(/^\/(.+)/, (msg, match) => {
       const knownCommands = fs.readdirSync(commandsPath)
         .filter(file => file.endsWith('.command.js'))
-        .map(file => file.split('.')[0]); // e.g. 'start.command.js' -> 'start'
+        .map(file => file.split('.')[0]);
 
       const inputCommand = match[1].split(' ')[0];
       if (!knownCommands.includes(inputCommand)) {
@@ -90,7 +92,8 @@ async function startBot() {
       }
     });
   } catch (err) {
-    console.error('❌ Gagal koneksi ke database:', err);
+    console.error('❌ Gagal koneksi ke database setelah retry:', err);
+    process.exit(1); // Exit agar container bisa restart jika pakai restart policy
   }
 }
 
