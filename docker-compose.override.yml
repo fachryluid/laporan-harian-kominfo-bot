@@ -4,6 +4,9 @@ services:
     container_name: laporan_web_dan_bot
     ports:
       - "3000:3000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./.env:/app/.env
     develop:
       watch:
         - action: sync
@@ -18,3 +21,6 @@ services:
         - action: rebuild
           path: package.json
     command: npm run dev
+  db:
+    ports:
+      - "3306:3306"
