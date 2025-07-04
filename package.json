@@ -6,7 +6,7 @@
     "start:server": "node server.js",
     "start:bot": "node bot.js",
     "dev": "concurrently \"nodemon bot.js\" \"nodemon server.js\"",
-    "sync": "node db/sync.js",  
+    "sync": "node db/sync.js",
     "alter": "node db/alter.js",
     "docker:compose": "docker compose up --build",
     "docker:compose:prod": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d"
@@ -17,6 +17,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
     "exceljs": "^4.4.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
