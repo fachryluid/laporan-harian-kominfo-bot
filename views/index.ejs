@@ -63,8 +63,8 @@
   <!-- HERO SECTION -->
   <div class="bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 min-h-screen flex flex-col">
     <div class="flex-1 flex flex-col justify-center">
-      <div class="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10 mb-10">
-        <div class="flex-1 flex flex-col items-start">
+      <div class="min-h-screen max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row items-center gap-10 mb-10">
+        <div class="flex-1 flex flex-col items-start w-full">
           <div class="flex items-center gap-4 mb-4">
             <img src="/assets/kominfo.png" alt="Logo Kominfo" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white p-1 shadow">
             <img src="/assets/buol.png" alt="Logo Buol" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white p-1 shadow object-contain">
@@ -85,8 +85,8 @@
             Mulai di Telegram
           </a>
         </div>
-        <div class="flex-1 flex justify-center">
-          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f916.svg" alt="Bot Illustration" class="w-64 h-64 md:w-80 md:h-80 drop-shadow-xl bg-white/20 rounded-full p-6">
+        <div class="flex-1 flex justify-center w-full">
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f916.svg" alt="Bot Illustration" class="w-64 h-64 md:w-80 md:h-80 drop-shadow-xl bg-white/20 rounded-full p-6 hidden lg:block">
         </div>
       </div>
       <!-- FITUR UTAMA -->
@@ -132,7 +132,9 @@
           Dinas Komunikasi, Informatika, Statistik & Persandian<br>Kabupaten Buol
         </span>
         <span class="text-sm mt-2 block md:mt-1">Dikembangkan oleh Bidang E-Government.</span>
-        <span class="text-xs text-blue-200 mt-2"><%= version %></span>
+        <span class="text-xs text-blue-200 mt-2">
+          <%= version %>
+        </span>
       </div>
       <div class="flex gap-4 mt-6 md:mt-0">
         <a href="https://t.me/YourBotUsername" target="_blank" class="inline-flex items-center gap-2 px-6 py-2 rounded-lg bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold shadow transition">
