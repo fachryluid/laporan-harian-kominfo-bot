@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Harian Kominfo Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif']
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#2563eb', // blue-600
+              dark: '#1e40af'     // blue-800
+            },
+            accent: {
+              DEFAULT: '#06b6d4', // cyan-500
+              dark: '#0e7490'     // cyan-800
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .card-feature {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 1rem;
+      box-shadow: 0 4px 24px 0 rgba(30, 64, 175, 0.10);
+      border: 1px solid #dbeafe;
+    }
+
+    .card-feature .text-gray-700 {
+      color: #1e293b;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="/assets/kominfo.png">
+</head>
+
+<body class="h-full bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 text-white transition-colors duration-300 font-nunito">
+  <!-- HERO SECTION -->
+  <div class="min-h-screen flex flex-col">
+    <div class="flex-1 flex flex-col justify-center">
+      <div class="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10 mb-10">
+        <div class="flex-1 flex flex-col items-start">
+          <div class="flex items-center gap-4 mb-4">
+            <img src="/assets/kominfo.png" alt="Logo Kominfo" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white p-1 shadow">
+            <img src="/assets/buol.png" alt="Logo Buol" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white p-1 shadow object-contain">
+          </div>
+          <span class="inline-block bg-white/20 text-white px-4 py-1 rounded-full mb-4 text-xs font-semibold tracking-widest shadow">Layanan ASN Buol</span>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-lg">
+            Otomatiskan Laporan Harian ASN<br>
+            <span class="text-yellow-300">dengan Bot Telegram & AI</span>
+          </h1>
+          <p class="text-white/90 text-lg md:text-xl mb-8 max-w-xl">
+            Cukup chat atau kirim foto ke bot, laporan harian Anda langsung tersimpan dan bisa diunduh dalam format Excel. Deskripsi kegiatan otomatis diperbaiki AI sesuai jabatan & unit kerja.
+          </p>
+          <a href="https://t.me/LaporanHarianKominfoBot" target="_blank" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold text-lg shadow-lg transition focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-offset-2">
+            <svg class="w-6 h-6" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="120" cy="120" r="120" fill="#229ED9" />
+              <path d="M175.6 74.7L157.6 166.2C155.9 174.5 151.1 176.5 144.1 172.7L110.6 148.2L94.2 163.8C92.3 165.7 90.8 167.2 87.5 167.2L89.8 140.2L154.6 83.8C157.4 81.3 154.1 80.1 150.6 82.6L75.6 132.2L49.3 124.1C41.2 121.7 41.1 116.2 50.5 112.6L167.1 67.1C173.7 64.7 179.1 68.6 175.6 74.7Z" fill="#fff" />
+            </svg>
+            Mulai di Telegram
+          </a>
+        </div>
+        <div class="flex-1 flex justify-center">
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f916.svg" alt="Bot Illustration" class="w-64 h-64 md:w-80 md:h-80 drop-shadow-xl bg-white/20 rounded-full p-6">
+        </div>
+      </div>
+      <!-- FITUR UTAMA -->
+      <div class="max-w-7xl mx-auto px-6 pb-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="card-feature p-8 flex flex-col items-center shadow-lg">
+          <svg class="w-12 h-12 mb-3 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 20h9" stroke-linecap="round" />
+            <path d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="font-bold mb-1 text-lg text-gray-700">Mudah & Otomatis</span>
+          <span class="text-sm text-gray-700 text-center">Chat/kirim foto, data langsung tersimpan tanpa ribet.</span>
+        </div>
+        <div class="card-feature p-8 flex flex-col items-center shadow-lg">
+          <svg class="w-12 h-12 mb-3 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12 8v4l3 3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="font-bold mb-1 text-lg text-gray-700">Deskripsi AI Cerdas</span>
+          <span class="text-sm text-gray-700 text-center">Deskripsi otomatis diperbaiki AI sesuai jabatan & unit kerja Anda.</span>
+        </div>
+        <div class="card-feature p-8 flex flex-col items-center shadow-lg">
+          <svg class="w-12 h-12 mb-3 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 17v-1a4 4 0 014-4h0a4 4 0 014 4v1" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="12" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4 21h16" stroke-linecap="round" />
+            <rect x="7" y="13" width="10" height="6" rx="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="font-bold mb-1 text-lg text-gray-700">Unduh Excel</span>
+          <span class="text-sm text-gray-700 text-center">Laporan bisa diunduh dalam format Excel, siap rekap & arsip.</span>
+        </div>
+      </div>
+    </div>
+    <!-- FOOTER -->
+    <footer class="bg-blue-900 text-white py-8 mt-auto">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex flex-col items-center md:items-start">
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/assets/kominfo.png" alt="Logo Kominfo" class="w-12 h-12 rounded-full bg-white p-1 shadow">
+            <img src="/assets/buol.png" alt="Logo Buol" class="w-12 h-12 rounded-full bg-white p-1 shadow object-contain">
+          </div>
+          <span class="text-base md:text-lg font-semibold text-blue-100 tracking-wide text-center md:text-left">
+            Dinas Komunikasi, Informatika, Statistik & Persandian<br>Kabupaten Buol
+          </span>
+          <span class="text-sm mt-2 block md:mt-1">Dikembangkan oleh Bidang E-Government.</span>
+        </div>
+        <div class="flex gap-4 mt-6 md:mt-0">
+          <a href="https://t.me/YourBotUsername" target="_blank" class="inline-flex items-center gap-2 px-6 py-2 rounded-lg bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold shadow transition">
+            <svg class="w-5 h-5" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="120" cy="120" r="120" fill="#229ED9" />
+              <path d="M175.6 74.7L157.6 166.2C155.9 174.5 151.1 176.5 144.1 172.7L110.6 148.2L94.2 163.8C92.3 165.7 90.8 167.2 87.5 167.2L89.8 140.2L154.6 83.8C157.4 81.3 154.1 80.1 150.6 82.6L75.6 132.2L49.3 124.1C41.2 121.7 41.1 116.2 50.5 112.6L167.1 67.1C173.7 64.7 179.1 68.6 175.6 74.7Z" fill="#fff" />
+            </svg>
+            Mulai di Telegram
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

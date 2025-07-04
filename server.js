@@ -8,17 +8,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', (req, res) => {
-  res.send(`
-    <html>
-      <head><title>💀💀💀</title></head>
-      <body style="margin:0; background-color:black; display:flex; align-items:center; justify-content:center; height:100vh;">
-        <video width="100%" height="100%" controls loop>
-          <source src="/assets/rickroll.mp4" type="video/mp4" />
-          Browsermu tidak mendukung pemutar video.
-        </video>
-      </body>
-    </html>
-  `);
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 app.use((req, res) => {
