@@ -11,6 +11,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/src', express.static(path.join(__dirname, 'src')));
 
 function getLatestGitTag() {
   try {
