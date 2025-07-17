@@ -21,8 +21,7 @@ module.exports = (bot) => {
     const arg = match[1];
     const username = msg.from.username || `${msg.from.first_name} ${msg.from.last_name || ''}`;
 
-    let bulan = null;
-    let tahun = null;
+    let bulan, tahun;
 
     if (arg) {
       const parsed = moment(arg, 'MMMM YYYY', true);
@@ -31,6 +30,10 @@ module.exports = (bot) => {
       }
       bulan = parsed.month(); // 0 = Januari
       tahun = parsed.year();
+    } else {
+      // Default: bulan dan tahun saat ini
+      bulan = moment().month();
+      tahun = moment().year();
     }
 
     try {

@@ -13,5 +13,6 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: 'mysql',
   },
-  secret: process.env.TOKEN
+  secret: process.env.TOKEN,
+  storageUrl: process.env.STORAGE_URL || 'http://localhost:3000/uploads',
 };
