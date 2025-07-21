@@ -1,0 +1,37 @@
+stages:
+  - deploy
+
+deploy_to_production:
+  stage: deploy
+  image: alpine:latest
+  tags:
+    - deploy-via-ssh
+
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh-client )'
+    - eval $(ssh-agent -s)
+    - |
+      echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+  script:
+    - |
+      echo "Deploying ref: ${CI_COMMIT_REF_NAME} to ${SSH_TARGET}..."
+      ssh -o StrictHostKeyChecking=no -p "${SSH_PORT}" "${SSH_TARGET}" << EOF
+        cd laporan-harian-kominfo-bot
+        git fetch --all --tags
+        git checkout ${CI_COMMIT_REF_NAME}
+        git pull origin ${CI_COMMIT_REF_NAME}
+        docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+        docker image prune -f
+      EOF
+    - echo "Deployment finished successfully."
+
+  rules:
+    # Jalankan job ini untuk push ke branch 'main'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+    # Jalankan job ini untuk tag yang dimulai dengan 'v' (contoh: v1.0, v2.3.4)
+    - if: '$CI_COMMIT_TAG =~ /^v.*/'
+      when: on_success
