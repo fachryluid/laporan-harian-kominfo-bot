@@ -24,19 +24,36 @@ module.exports = function (bot, pendingLaporan) {
           foto: fileName || null
         });
         await bot.editMessageReplyMarkup({ inline_keyboard: [] }, { chat_id: chatId, message_id: messageId });
-        await bot.sendMessage(chatId, '✅ Laporan berhasil disimpan!');
+        await bot.sendMessage(chatId, '✅ Deskripsi berhasil disimpan!');
         pendingLaporan.delete(userId);
       } catch (err) {
         console.error('❌ DB Error:', err);
         await bot.sendMessage(chatId, '❌ Gagal menyimpan laporan.');
       }
+    } else if (data === 'simpan_asli') {
+      await db.Laporan.create({
+        user_id: userId,
+        username,
+        deskripsi: raw,
+        deskripsi_ai: null,
+        foto: fileName || null
+      });
+      await bot.editMessageReplyMarkup({ inline_keyboard: [] }, { chat_id: chatId, message_id: messageId });
+      await bot.sendMessage(chatId, '✅ Deskripsi asli berhasil disimpan!');
+      pendingLaporan.delete(userId);
     } else if (data === 'ulang') {
       try {
+        // Cek kelengkapan profil sebelum memproses laporan
+        const userProfile = await db.UserProfile.findByPk(userId);
+        const jabatan = userProfile?.jabatan;
+        const unitKerja = userProfile?.unit_kerja;
+
         laporan.retryCount = (laporan.retryCount || 0) + 1;
 
-        const newRawDesc = await perbaikiDeskripsi(raw);
+        const { text: newDeskripsi, duration: newDuration } = await perbaikiDeskripsi(raw, unitKerja, jabatan);
 
-        laporan.deskripsi = cleanDeskripsiAI(newRawDesc);
+        laporan.deskripsi = cleanDeskripsiAI(newDeskripsi);
+        laporan.duration = newDuration;
         pendingLaporan.set(userId, laporan);
 
         const caption = generateCaption(laporan);

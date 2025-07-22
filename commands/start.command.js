@@ -24,7 +24,7 @@ Selamat datang di *Bot Laporan Harian Diskominfo-SP Kab. Buol*.
 
 🚀 Silakan mulai dengan mengirim laporan harianmu sekarang juga.
 
-Bot ini dikembangkan oleh *Bidang E-Government - Diskominfo-SP Kab. Buol*. ${version} © 2025. All rights reserved.
+Bot ini dikembangkan oleh *Bidang E-Government - Dinas Komunikasi, Informatika, Statistik Dan Persandian Kab. Buol*. ${version} © 2025. All rights reserved.
     `;
 
     bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'Markdown' });

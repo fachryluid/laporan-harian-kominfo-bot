@@ -2,6 +2,7 @@ require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const db = require('./models');
 const fs = require('fs');
+const { registerCommands, getCommandNames } = require('./utils/commandLoader');
 const path = require('path');
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 const pendingLaporan = new Map();
@@ -28,15 +29,8 @@ async function waitForDb(maxRetries = 10, delay = 2000) {
     await waitForDb();
     await db.sequelize.sync();
 
-    const commandsPath = path.join(__dirname, 'commands');
-    fs.readdirSync(commandsPath)
-      .filter(file => file.endsWith('.command.js'))
-      .forEach(file => {
-        const command = require(path.join(commandsPath, file));
-        if (typeof command === 'function') {
-          command(bot); // inject bot
-        }
-      });
+    // Memuat dan mendaftarkan semua command secara dinamis
+    registerCommands(bot);
 
     const uploadsDir = path.join(__dirname, 'uploads');
     if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
@@ -46,10 +40,7 @@ async function waitForDb(maxRetries = 10, delay = 2000) {
 
     // Cek command tidak dikenal
     bot.onText(/^\/(.+)/, (msg, match) => {
-      const knownCommands = fs.readdirSync(commandsPath)
-        .filter(file => file.endsWith('.command.js'))
-        .map(file => file.split('.')[0]);
-
+      const knownCommands = getCommandNames();
       const inputCommand = match[1].split(' ')[0];
       if (!knownCommands.includes(inputCommand)) {
         bot.sendMessage(msg.chat.id, `❌ Perintah /${inputCommand} tidak dikenali.`);
