@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2024-07-22
+### Added
+- **AI Report Assistant (`perbaikiDeskripsi`):**
+  - Integrates with Google Gemini API (with a local Ollama fallback) to rewrite user-submitted reports into a formal, professional tone.
+  - Uses the user's `jabatan` (job title) and `unit_kerja` (work unit) from their profile to provide context to the AI for better results.
+- **Interactive Submission Flow (`onMessage`, `onCallback`):**
+  - After a user submits a report, the bot presents the AI-enhanced version for confirmation.
+  - Users can choose to save the AI version, save their original text, ask the AI to retry, or cancel the submission via inline keyboard buttons.
+- **Advanced Excel Export (`/unduh`):**
+  - The generated Excel report now groups activities by date and then by working session (e.g., morning/afternoon).
+  - A new "Detail" worksheet is included, which lists the original description, the AI-enhanced description, and a clickable hyperlink to the associated photo.
+  - The main report sheet uses the AI description for a more professional output.
+- **User Profile Management:**
+  - Added a full suite of commands for user profile management: `/profil`, `/ubahnama`, `/ubahnip`, `/ubahjabatan`, `/ubahunit`.
+  - The bot now checks for a complete profile before processing a report to ensure high-quality AI suggestions.
+- **UX & Code Quality Improvements:**
+  - Added a command suggestion helper for users who type commands without the leading `/`.
+  - Refactored command loading to be dynamic, improving modularity.
+  - Updated the database schema to store both original and AI-generated descriptions.
+  - Added a simple Express server to serve uploaded images for the Excel export links.
+
+### Changed
+- **AI Context & Flow:** The bot now requires a complete user profile before accepting reports. It uses the profile's `jabatan` (job title) and `unit_kerja` (work unit) to provide better context to the AI, resulting in more accurate suggestions.
+- **Code Structure:** Refactored command loading to be fully dynamic (`commandLoader.js`). The callback query logic for `/hapuslaporanterakhir` is now self-contained within its command file, improving modularity and preventing conflicts.
+- **Database Schema:** The `reports` table was updated to store both the original (`deskripsi`) and the AI-enhanced (`deskripsi_ai`) descriptions in separate columns.
+
+### Fixed
+- The `/hapuslaporanterakhir` command now correctly handles its own callback queries, preventing potential conflicts with other inline buttons.
+- The Indonesian locale for `moment.js` is now correctly configured and used for date formatting in exports.
+
+---
+
 ## [1.1.0] - 2025-07-17
 ### Added
 - AI-powered enhancement of daily report descriptions
