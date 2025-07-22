@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.1] - 2024-07-22
+### Changed
+- Replaced the static bot illustration on the landing page with a dynamic video demonstration playing inside a smartphone frame for a more engaging and informative user experience.
+
+### Fixed
+- Corrected video playback issues (autoplay, aspect ratio) to ensure the demo plays smoothly and without distortion.
+- Added a subtle shadow effect to the phone mockup to create a floating illusion.
+
 ## [1.2.0] - 2024-07-22
 ### Added
 - **AI Report Assistant (`perbaikiDeskripsi`):**

@@ -19,6 +19,7 @@
   <meta name="twitter:image" content="/assets/banner.png">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
   <link href="/src/output.css" rel="stylesheet">
+  <link href="/src/style.css" rel="stylesheet">
   <style>
     body {
       font-family: 'Nunito', sans-serif;
@@ -65,7 +66,14 @@
           </a>
         </div>
         <div class="flex-1 flex justify-center w-full">
-          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f916.svg" alt="Bot Illustration" class="w-64 h-64 md:w-80 md:h-80 drop-shadow-xl bg-white/20 rounded-full p-6 hidden lg:block">
+          <div class="phone">
+            <div class="notch-container">
+              <div class="notch"></div>
+            </div>
+            <video autoplay muted loop playsinline>
+              <source src="/assets/usage.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
       </div>
       <!-- FITUR UTAMA -->
